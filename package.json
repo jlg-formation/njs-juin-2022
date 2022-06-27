@@ -15,6 +15,8 @@
     "serve-index": "^1.9.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.18"
+    "@types/node": "^18.0.0",
+    "nodemon": "^2.0.18",
+    "typescript": "^4.7.4"
   }
 }
