@@ -16,7 +16,7 @@ app.use("/toto/titi", (req, res, next) => {
 });
 
 app.use(express.static("."));
-app.use(serveIndex("."));
+app.use(serveIndex(".", { icons: true }));
 
 app.listen(port, () => {
   console.log("Server started with success on port " + port);
