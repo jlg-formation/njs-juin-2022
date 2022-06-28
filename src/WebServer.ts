@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import { createServer, Server } from "http";
 import serveIndex from "serve-index";
 import { api } from "./api";
 import { WebServerOptions } from "./interfaces/WebServerOptions";
@@ -7,7 +8,7 @@ export class WebServer {
   options: WebServerOptions = {
     port: 3000,
   };
-  app: Express;
+  server: Server;
 
   constructor(options?: WebServerOptions) {
     // this.options = { ...this.options, ...options };
@@ -29,12 +30,19 @@ export class WebServer {
     app.use(express.static("."));
     app.use(serveIndex(".", { icons: true }));
 
-    this.app = app;
+    this.server = createServer(app);
   }
 
   start(): Promise<void> {
-    this.app.listen(this.options.port, () => {
-      console.log(`Server started with success on port ${this.options.port}`);
+    return new Promise<void>((resolve, reject) => {
+      this.server.once("error", (err) => {
+        console.log("err: ", err);
+        reject(err);
+      });
+      this.server.listen(this.options.port, () => {
+        console.log(`Server started with success on port ${this.options.port}`);
+        resolve();
+      });
     });
   }
 
