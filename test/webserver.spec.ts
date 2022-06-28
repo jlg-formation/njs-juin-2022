@@ -13,7 +13,7 @@ describe("WebServer", function () {
     // test that it is well stopped by doing an HTTP request on it.
     let error = undefined;
     try {
-      const response2 = await axios.get("http://localhost:3456/api/ping");
+      await axios.get("http://localhost:3456/api/ping");
     } catch (err) {
       error = err;
     }
