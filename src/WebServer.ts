@@ -47,6 +47,14 @@ export class WebServer {
   }
 
   stop(): Promise<void> {
-    throw new Error("Method not implemented.");
+    return new Promise((resolve, reject) => {
+      this.server.close((err) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve();
+      });
+    });
   }
 }
