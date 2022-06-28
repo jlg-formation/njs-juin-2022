@@ -15,7 +15,7 @@ describe("WebServer", function () {
     await webServer.stop();
   });
 
-  it.only("should delete all articles", async () => {
+  it("should delete all articles", async () => {
     // add 2 articles and delete them.
     await axios.post(url, newArticle);
     await axios.post(url, newArticle);
