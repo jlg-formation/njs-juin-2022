@@ -1,5 +1,6 @@
 import express from "express";
 import { createServer, Server } from "http";
+import morgan from "morgan";
 import serveIndex from "serve-index";
 import { api } from "./api";
 import { WebServerOptions } from "./interfaces/WebServerOptions";
@@ -16,10 +17,7 @@ export class WebServer {
 
     const app = express();
 
-    app.use((req, res, next) => {
-      console.log("req: ", req.url);
-      next();
-    });
+    app.use(morgan("tiny"));
 
     app.use("/toto/titi", (req, res) => {
       res.json({ toto: "titi" });

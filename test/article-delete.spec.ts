@@ -29,4 +29,19 @@ describe("WebServer", function () {
     articles = response.data as Article[];
     assert(articles.length === 0);
   });
+
+  it("should delete one article", async () => {
+    // add 1 article and delete it.
+    let response = await axios.post(url, newArticle);
+    const id = (response.data as { id: string }).id;
+    assert(id);
+
+    response = await axios.delete(url + "/" + id);
+    assert(response.status === 204);
+
+    response = await axios.get(url + "/" + id, {
+      validateStatus: null,
+    });
+    assert(response.status === 404);
+  });
 });
