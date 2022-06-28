@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express from "express";
 import { createServer, Server } from "http";
 import serveIndex from "serve-index";
 import { api } from "./api";
@@ -21,7 +21,7 @@ export class WebServer {
       next();
     });
 
-    app.use("/toto/titi", (req, res, next) => {
+    app.use("/toto/titi", (req, res) => {
       res.json({ toto: "titi" });
     });
 

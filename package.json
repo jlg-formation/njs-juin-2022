@@ -7,7 +7,8 @@
     "test": "nyc mocha",
     "start": "nodemon src/server.ts",
     "build": "tsc",
-    "start:prod": "node dist/server.js"
+    "start:prod": "node dist/server.js",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -21,7 +22,10 @@
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.0.0",
     "@types/serve-index": "^1.9.1",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
     "axios": "^0.27.2",
+    "eslint": "^8.18.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.18",
     "nyc": "^15.1.0",
