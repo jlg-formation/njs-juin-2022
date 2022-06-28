@@ -13,17 +13,27 @@ const articles: Article[] = [
 const app = express.Router();
 
 app.get("/", (req, res) => {
-  res.json(articles);
+  try {
+    res.json(articles);
+  } catch (err) {
+    console.log("err: ", err);
+    res.status(500).end();
+  }
 });
 
 app.get("/:id", (req, res) => {
-  const id = req.params.id;
-  const article = articles.find((a) => a.id === id);
-  if (article === undefined) {
-    res.status(404).end();
-    return;
+  try {
+    const id = req.params.id;
+    const article = articles.find((a) => a.id === id);
+    if (article === undefined) {
+      res.status(404).end();
+      return;
+    }
+    res.json(article);
+  } catch (err) {
+    console.log("err: ", err);
+    res.status(500).end();
   }
-  res.json(article);
 });
 
 app.use(express.json());
