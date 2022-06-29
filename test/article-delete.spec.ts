@@ -22,6 +22,7 @@ describe("WebServer", function () {
 
     let response = await axios.get(url);
     let articles = response.data as Article[];
+    console.log("articles.length: ", articles.length);
     assert(articles.length >= 2);
 
     await axios.delete(url);
@@ -42,6 +43,7 @@ describe("WebServer", function () {
     response = await axios.get(url + "/" + id, {
       validateStatus: null,
     });
+    console.log("response.status: ", response.status);
     assert(response.status === 404);
   });
 });

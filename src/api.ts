@@ -5,7 +5,7 @@ import { articleRouter } from "./articles.router";
 export const api = (server: Server) => {
   const app = express.Router();
 
-  app.use("/articles", articleRouter);
+  app.use("/articles", articleRouter(server));
 
   app.get("/ping", (req, res) => {
     res.json({ test: "ok" });
