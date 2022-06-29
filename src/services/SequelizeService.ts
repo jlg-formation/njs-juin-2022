@@ -6,7 +6,15 @@ import { AbstractService } from "./AbstractService";
 
 export class SequelizeService extends AbstractService {
   sequelize = new Sequelize(
-    process.env.MYDB_URI || "mariadb://root:admin@localhost:3306/njs2"
+    process.env.MYDB_URI || "mariadb://root:admin@localhost:3306/njs2",
+    {
+      pool: {
+        max: 15,
+        min: 0,
+        acquire: 30000,
+        idle: 10000,
+      },
+    }
   );
 
   constructor(server: Server) {
@@ -21,10 +29,6 @@ export class SequelizeService extends AbstractService {
   async init() {
     try {
       console.log("About to connect to DB...");
-      await this.sequelize.authenticate();
-      console.log("Successfully connected to DB");
-      this.#init();
-      await this.sequelize.sync({ force: false });
       this.server.once("close", () => {
         (async () => {
           console.log("closing sequelize...");
@@ -32,6 +36,11 @@ export class SequelizeService extends AbstractService {
           console.log("sequelize closed.");
         })();
       });
+      await this.sequelize.authenticate();
+      console.log("Successfully connected to DB");
+      this.#init();
+      await this.sequelize.sync({ force: false });
+
       this.eventEmmitter.emit("isReady");
     } catch (err) {
       console.log("err: ", err);
