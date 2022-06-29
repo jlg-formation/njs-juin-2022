@@ -10,6 +10,11 @@ export const api = (server: Server) => {
   app.get("/ping", (req, res) => {
     res.json({ test: "ok" });
   });
+  app.get("/crash", (req, res) => {
+    (async () => {
+      throw new Error("crash...");
+    })();
+  });
 
   return app;
 };

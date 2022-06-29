@@ -3,7 +3,7 @@ import axios from "axios";
 import { sleep } from "../src/misc";
 import { WebServer } from "../src/WebServer";
 
-describe.only("WebServer", () => {
+describe("WebServer", () => {
   it("should start and stop correctly", async function () {
     this.timeout(5000);
     const webServer = new WebServer({ port: 3456 });
