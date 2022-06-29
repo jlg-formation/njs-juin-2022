@@ -16,6 +16,7 @@ export class WebServer {
     Object.assign(this.options, options);
 
     const app = express();
+    this.server = createServer(app);
 
     app.use(morgan("tiny"));
 
@@ -23,12 +24,10 @@ export class WebServer {
       res.json({ toto: "titi" });
     });
 
-    app.use("/api", api);
+    app.use("/api", api(this.server));
 
     app.use(express.static("."));
     app.use(serveIndex(".", { icons: true }));
-
-    this.server = createServer(app);
   }
 
   start(): Promise<void> {
