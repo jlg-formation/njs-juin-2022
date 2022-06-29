@@ -18,7 +18,7 @@ export class MariaDBService {
 
     server.once("close", () => {
       (async () => {
-        console.log("closing the DB pool");
+        console.log("closing the DB pool...");
         await this.pool.end();
         console.log("Pool closed.");
       })();
