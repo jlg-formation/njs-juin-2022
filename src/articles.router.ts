@@ -20,7 +20,7 @@ export const articleRouter = (server: Server) => {
       next();
       return;
     }
-    service.eventEmmitter.on("isReady", () => {
+    service.eventEmmitter.once("isReady", () => {
       console.log("received isReady");
       isReady = true;
       next();
