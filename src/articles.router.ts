@@ -1,12 +1,30 @@
 import express from "express";
 import { Server } from "http";
 import { Article } from "./interfaces/article";
-import { MariaDBService } from "./services/MariaDBService";
+import { SequelizeService } from "./services/SequelizeService";
 
 export const articleRouter = (server: Server) => {
-  const service = new MariaDBService(server);
+  // const service = new MariaDBService(server);
+  const service = new SequelizeService(server);
+
+  let isReady = false;
+  (async () => {
+    await service.init();
+    isReady = true;
+  })();
 
   const app = express.Router();
+
+  app.use((req, res, next) => {
+    if (isReady) {
+      next();
+    }
+    service.eventEmmitter.on("isReady", () => {
+      console.log("received isReady");
+      isReady = true;
+      next();
+    });
+  });
 
   app.get("/", (req, res) => {
     (async () => {

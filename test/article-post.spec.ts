@@ -15,11 +15,12 @@ describe("WebServer", function () {
     await webServer.stop();
   });
 
-  it("should create one article", async () => {
+  it.only("should create one article", async () => {
     const response = await axios.post<{ id: string }>(url, newArticle);
     const { id } = response.data;
     const response2 = await axios.get<Article>(url + "/" + id);
     const article = response2.data;
+    console.log("article: ", article);
     assert(article.id === id);
   });
 });
