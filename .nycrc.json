@@ -1,4 +1,6 @@
 {
   "reporter": "html",
-  "produce-source-map": true
+  "produce-source-map": true,
+  "source-map": true,
+  "enable-source-maps": true
 }

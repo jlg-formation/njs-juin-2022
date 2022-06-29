@@ -1,5 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/mocharc.json",
   "require": ["ts-node/register", "source-map-support/register"],
-  "extension": [".ts"]
+  "extension": [".ts"],
+  "enable-source-maps": true
 }
