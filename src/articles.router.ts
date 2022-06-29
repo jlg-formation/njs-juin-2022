@@ -18,6 +18,7 @@ export const articleRouter = (server: Server) => {
   app.use((req, res, next) => {
     if (isReady) {
       next();
+      return;
     }
     service.eventEmmitter.on("isReady", () => {
       console.log("received isReady");

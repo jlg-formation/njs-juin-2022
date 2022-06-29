@@ -1,3 +1,4 @@
 {
-  "reporter": "html"
+  "reporter": "html",
+  "produce-source-map": true
 }
